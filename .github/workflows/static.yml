@@ -1,0 +1,108 @@
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Jogos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mini Plataforma de Jogos</h1>
+    </header>
+
+    <nav class="menu">
+        <button onclick="showGame('jogo1')">🎮 Jogo 1</button>
+        <button onclick="showGame('jogo2')">🧩 Jogo 2</button>
+    </nav>
+
+    <main>
+        <div id="jogo1" class="game">
+            <h2>Jogo 1: Clique no Botão</h2>
+            <p>Pontuação: <span id="score1">0</span></p>
+            <button onclick="addPoint()">Clique aqui!</button>
+        </div>
+
+        <div id="jogo2" class="game" style="display:none;">
+            <h2>Jogo 2: Adivinhe o Número</h2>
+            <p>Tente adivinhar um número entre 1 e 10</p>
+            <input type="number" id="guess" min="1" max="10">
+            <button onclick="checkNumber()">Enviar</button>
+            <p id="result"></p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+header {
+    background: #222;
+    padding: 20px;
+    font-size: 22px;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #ffbe0b;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.game {
+    margin-top: 30px;
+}// Alternar entre jogos
+function showGame(gameId) {
+    document.querySelectorAll('.game').forEach(g => g.style.display = 'none');
+    document.getElementById(gameId).style.display = 'block';
+}
+
+// Jogo 1
+let score = 0;
+function addPoint() {
+    score++;
+    document.getElementById("score1").innerText = score;
+}
+
+// Jogo 2
+let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+function checkNumber() {
+    let guess = document.getElementById("guess").value;
+    let result = document.getElementById("result");
+
+    if (guess == randomNumber) {
+        result.innerText = "🎉 Acertou!";
+        randomNumber = Math.floor(Math.random() * 10) + 1;
+    } else {
+        result.innerText = "❌ Errou, tente novamente!";
+    }
+}
+uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
