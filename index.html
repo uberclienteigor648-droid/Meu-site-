@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Jogos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mini Plataforma de Jogos</h1>
+    </header>
+
+    <nav class="menu">
+        <button onclick="showGame('jogo1')">🎮 Jogo 1</button>
+        <button onclick="showGame('jogo2')">🧩 Jogo 2</button>
+    </nav>
+
+    <main>
+        <div id="jogo1" class="game">
+            <h2>Jogo 1: Clique no Botão</h2>
+            <p>Pontuação: <span id="score1">0</span></p>
+            <button onclick="addPoint()">Clique aqui!</button>
+        </div>
+
+        <div id="jogo2" class="game" style="display:none;">
+            <h2>Jogo 2: Adivinhe o Número</h2>
+            <p>Tente adivinhar um número entre 1 e 10</p>
+            <input type="number" id="guess" min="1" max="10">
+            <button onclick="checkNumber()">Enviar</button>
+            <p id="result"></p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
